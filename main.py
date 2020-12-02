@@ -131,13 +131,9 @@ for x in 0, 1:
             if ddnf() != None:
                 ddnf_array_e.append(ddnf())
                 ddnf_array_e.append("\/")
-                if len(ddnf_array_e) != 0:
-                    ddnf_array_e.pop()
             if dknf() != None:
                 dknf_array_e.append(dknf())
                 dknf_array_e.append("/\\")
-                if len(dknf_array_e) != 0:
-                    dknf_array_e.pop()
             f_arr.append(str(func_f()))
             linear_array.append(linear())
 
