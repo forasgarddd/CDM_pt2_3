@@ -19,6 +19,24 @@ def func_f():
     if x == 1 and y == 1 and z == 1:
         return 0
 
+def func_f1():
+    if x == 0 and y == 0 and z == 0:
+        return 1
+    if x == 0 and y == 0 and z == 1:
+        return 1
+    if x == 0 and y == 1 and z == 0:
+        return 1
+    if x == 0 and y == 1 and z == 1:
+        return 1
+    if x == 1 and y == 0 and z == 0:
+        return 0
+    if x == 1 and y == 0 and z == 1:
+        return 0
+    if x == 1 and y == 1 and z == 0:
+        return 1
+    if x == 1 and y == 1 and z == 1:
+        return 0
+
 
 # Zhegalkin polynomial
 def linear():
@@ -114,6 +132,7 @@ ddnf_array_e = []
 dknf_array_e = []
 linear_array = []
 f_arr = []
+f_arr1 = []
 print("x y z  F")
 for x in 0, 1:
     for y in 0, 1:
@@ -135,23 +154,34 @@ for x in 0, 1:
                 dknf_array_e.append(dknf())
                 dknf_array_e.append("/\\")
             f_arr.append(str(func_f()))
+            f_arr1.append(str(func_f1()))
             linear_array.append(linear())
 
 
-def inverse():
+
+def inverse(f):
     f = ''.join(f_arr)
     f = list(f)
     for i in range(len(f)):
         f[i] = '1' if f[i] == '0' else '0'
     return ''.join(f)
 
-
 def is_self_dual():
     f = ''.join(f_arr)
-    if f == ''.join(reversed(inverse())):
+    if f == ''.join(reversed(inverse(f))):
         return "Функція самодвоїста"
     else:
         return "Функція не самодвоїста"
+
+def is_dual(f1,f2):
+    f1 = ''.join(f_arr)
+    f2 = ''.join(f_arr1)
+    f1 = ''.join(reversed(inverse(f1)))
+    print(f1)
+    if f2 == f1:
+        return "Функція двоїста до f2"
+    else:
+        return "Функція не двоїста до f2"
 
 
 # optional check for linear
@@ -169,6 +199,8 @@ def output():
         dknf_array_e.pop()
     print("5.", "ДДНФ:", *ddnf_array_e)
     print("6.", "ДКНФ:", *dknf_array_e)
+    print(is_dual(func_f, func_f1))
+
 
 
 output()
